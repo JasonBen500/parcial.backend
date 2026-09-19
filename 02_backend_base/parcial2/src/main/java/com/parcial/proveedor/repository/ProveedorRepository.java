@@ -14,8 +14,8 @@ public interface ProveedorRepository extends JpaRepository<Proveedor, Integer> {
     // ordenados por ID_PROVEEDOR de forma descendente.
     //
     // Pista: el nombre del metodo describe la consulta.
-    //        findBy<Campo><Condicion>OrderBy<Campo>Desc
+    // findBy<Campo><Condicion>OrderBy<Campo>Desc
     // Debe devolver: List<Proveedor>
     // =================================================================
-
+    List<Proveedor> findByEstadoTrueOrderByIdProveedorDesc();
 }

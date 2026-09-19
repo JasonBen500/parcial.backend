@@ -33,7 +33,10 @@ public class ProveedorService {
     // Use el metodo que declaro en ProveedorRepository.
     // =================================================================
     public List<ProveedorDTO> mostrarActivos() {
-        return null; // <-- reemplace esta linea por su implementacion
+         return proveedorRepository.findByEstadoTrueOrderByIdProveedorDesc()
+                .stream()
+                .map(this::convertToDTO)
+                .collect(Collectors.toList());
     }
 
     // =================================================================
@@ -43,7 +46,8 @@ public class ProveedorService {
     // Devuelva el ProveedorDTO ya guardado (con su idProveedor generado).
     // =================================================================
     public ProveedorDTO crearProveedor(ProveedorDTO dto) {
-        return null; // <-- reemplace esta linea por su implementacion
+        Proveedor entity = convertToEntity(dto);
+        return convertToDTO(proveedorRepository.save(entity));
     }
 
     // =================================================================
@@ -55,7 +59,14 @@ public class ProveedorService {
     // OJO: no debe cambiar el estado del registro.
     // =================================================================
     public ProveedorDTO modificarProveedor(Integer idProveedor, ProveedorDTO dto) {
-        return null; // <-- reemplace esta linea por su implementacion
+         Proveedor proveedor = proveedorRepository.findById(idProveedor)
+                .orElseThrow(() -> new RuntimeException("El proveedor no existe con Id: " + idProveedor));
+
+        proveedor.setNombre(dto.getNombre());
+        proveedor.setNit(dto.getNit());
+        proveedor.setTelefono(dto.getTelefono());
+        proveedor.setDireccion(dto.getDireccion());
+        return convertToDTO(proveedorRepository.save(proveedor));
     }
 
     // =================================================================
@@ -66,7 +77,11 @@ public class ProveedorService {
     // NO debe borrar fisicamente el registro de la tabla.
     // =================================================================
     public ProveedorDTO anularProveedor(Integer idProveedor) {
-        return null; // <-- reemplace esta linea por su implementacion
+        Proveedor proveedor = proveedorRepository.findById(idProveedor)
+                .orElseThrow(() -> new RuntimeException("El proveedor no existe con Id: " + idProveedor));
+
+        proveedor.setEstado(false);
+        return convertToDTO(proveedorRepository.save(proveedor));
     }
 
     // =================================================================

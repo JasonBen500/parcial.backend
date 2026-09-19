@@ -15,7 +15,7 @@ import java.io.Serializable;
  * Mapea la tabla "proveedor" de la base de datos parcial2.
  */
 @Entity
-@Table(name = "proveedor")
+@Table(name = "proveedor_10")
 public class Proveedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,26 +23,26 @@ public class Proveedor implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "ID_PROVEEDOR")
+    @Column(name = "ID_PROVEEDOR_10")
     private Integer idProveedor;
 
-    @Column(name = "ESTADO")
+    @Column(name = "ESTADO_10")
     private Boolean estado;
 
     @Size(max = 65)
-    @Column(name = "NOMBRE")
+    @Column(name = "NOMBRE_10")
     private String nombre;
 
     @Size(max = 20)
-    @Column(name = "NIT")
+    @Column(name = "NIT_10")
     private String nit;
 
     @Size(max = 15)
-    @Column(name = "TELEFONO")
+    @Column(name = "TELEFONO_10")
     private String telefono;
 
     @Size(max = 100)
-    @Column(name = "DIRECCION")
+    @Column(name = "DIRECCION_10")
     private String direccion;
 
     public Proveedor() {
